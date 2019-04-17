@@ -5,19 +5,22 @@ class Api::V1::UsersController < ApplicationController
         render json: @users., status: :ok
     end
     
-    def new
-    end
-
+    # return current user for profile route
     def show
+
     end
 
+    # create a user from a hash being passed through params from frontend 
     def create
+
     end
 
     def edit
+
     end
 
     def destroy
+        
     end
 
     private
