@@ -1,4 +1,4 @@
-class API::V1::RecommendationsController < ApplicationController
+class Api::V1::RecommendationsController < ApplicationController
 
         # --- YELP API CALLS, v3 REFERENCE ---
 
@@ -32,25 +32,15 @@ class API::V1::RecommendationsController < ApplicationController
 
     # random suggestion returned to user based on documented preferences only
     def random_suggestion
-        data = request
-        search_data = {}.tap do |h|
-            h[:term] = data.term if data.term
-            h[:location] = data.location if data.location
-            h[:latitude] = data.latitude if data.latitude
-            h[:longitude] = data.longitude if data.longitude
-            h[:radius] = data.radius if data.radius
-            h[:categories] = data.categories if data.categories
-            h[:limit] = 100
-            h[:sort_by] = data.sort_by if data.sort_by
-            h[:price] = data.price if data.price
-            h[:open_now] = data.open_now if data.open_now
-            h[:open_at] = data.open_at if data.open_at
-            h[:attributes] = data.attributes if data.attributes
-        end
+        query = search_query(params)
+    
+        
+        
 
-        results = yelp_business_search(search_data)
-
-        render json: results
+        # results = yelp_business_search(search_data)
+        # binding.pry
+        
+        render json: query
     end
 
     # guided suggestion based on user selected preferences and selected attributes 
@@ -59,13 +49,31 @@ class API::V1::RecommendationsController < ApplicationController
 
     private
 
-    # reusable method for calls
+    # building query hash that will be used for API call to Yelp
+    def search_query(params)
+        search_data = {}.tap do |h|
+            h[:term] = params["term"] if params["term"]
+            h[:location] = params["location"] if params["location"]
+            h[:latitude] = params["latitude"] if params["latitude"]
+            h[:longitude] = params["longitude"] if params["longitude"]
+            h[:radius] = params["radius"] if params["radius"]
+            h[:categories] = params["categories"] if params["categories"]
+            h[:limit] = params["limit"] if params["limit"] ||= "100"
+            h[:sort_by] = params["sort_by"] if params["sort_by"]
+            h[:price] = params["price"] if params["price"]
+            h[:open_now] = params["open_now"] if params["open_now"]
+            h[:open_at] = params["open_at"] if params["open_at"]
+            h[:attributes] = params["attributes"] if params["attributes"]
+        end
+    end
+
+    # reusable method for business search calls
     def yelp_business_search(search_data)
         # limit of 1000 results per call
         conn = Faraday.new(:url => "https://api.yelp.com/v3/businesses/search")
 
         binding.pry 
-        
+
         biz_results = conn.get do |req|
                 req.headers['Authorization'] = "Bearer " + ENV['YELP_SECRET']
                 req.headers['User-Agent'] = "wdywe-api"

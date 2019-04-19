@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :users, only: %i[index show create edit destroy]
       resources :sessions, only: %i[create destroy]
 
+      post '/random', to: 'recommendations#random_suggestion'
       get '/profile', to: 'users#show'
     end
   end

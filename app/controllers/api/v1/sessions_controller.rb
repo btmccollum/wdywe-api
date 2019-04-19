@@ -1,4 +1,4 @@
-class API::V1::SessionsController < ApplicationController
+class Api::v1::SessionsController < ApplicationController
     # skip_before_action :authenticate, only: %i[create login logout]
 
     # normal login flow - no OAuth

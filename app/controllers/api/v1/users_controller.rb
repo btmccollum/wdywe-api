@@ -15,13 +15,13 @@ class Api::V1::UsersController < ApplicationController
 
     end
 
-    def edit
+    # def edit
 
-    end
+    # end
 
-    def destroy
-        
-    end
+    # def destroy
+
+    # end
 
     private
 
