@@ -15,10 +15,9 @@ class Api::V1::UsersController < ApplicationController
         user = User.new(user_params)
 
         if user.save 
-            render json: user, status: :ok
+            jwt = Auth.encrypt({id: user.id})
+            render json: { user: user, jwt: jwt }, status: :ok
         else
-            error_message = ["Passwords must match."]
- 
             render json: { errors: user.errors.full_messages }, status: 400
         end
     end

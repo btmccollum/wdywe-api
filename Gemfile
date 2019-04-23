@@ -46,6 +46,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
   gem 'database_cleaner'
+  gem 'pry'
 end
 
 group :test do
@@ -59,7 +60,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'thin'
-  gem 'pry'
+  gem 'pry-rails'
 end
 
 group :production do
