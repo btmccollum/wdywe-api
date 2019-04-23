@@ -21,14 +21,14 @@ RSpec.describe Api::V1::UsersController, type: :controller do
                 expect(response.status).to be(200)
             end
 
-            it 'it creats a User with JWT token' do
+            it 'it creates a User with JWT token' do
                 post :create, params: @parameters
 
                 expect(response.body).to include("jwt")
                 expect(response.status).to be(200)
             end
 
-            it 'successfully creates a User and accompanying JWT token' do
+            it 'the JWT token is properly encrypted and includes user ID' do
                 post :create, params: @parameters
 
                 user = JSON.parse(response.body)                

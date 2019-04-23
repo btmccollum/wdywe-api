@@ -7,7 +7,7 @@ class Api::V1::UsersController < ApplicationController
     
     # return current user for profile route
     def show
-
+        render json: { user: current_user }
     end
 
     # create a user from a hash being passed through params from frontend 

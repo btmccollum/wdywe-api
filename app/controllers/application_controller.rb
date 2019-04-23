@@ -14,7 +14,7 @@ class ApplicationController < ActionController::API
     end
 
     def authenticate    
-        render json: {error: "unauthorized"}, status: 401 unless current_user
+        render json: {errors: "Unauthorized user."}, status: 401 unless current_user
     end
 
     private
@@ -36,8 +36,4 @@ class ApplicationController < ActionController::API
         def user_hash(json)
             eval(json)[:user]
         end      
-
-        def is_token_expired?
-            current_user.refresh_token_if_expired
-        end 
 end
