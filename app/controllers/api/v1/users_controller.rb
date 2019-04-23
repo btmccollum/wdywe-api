@@ -2,7 +2,7 @@ class Api::V1::UsersController < ApplicationController
     # only for testing purposes
     def index
         @users = User.all
-        render json: @users., status: :ok
+        render json: @users, status: :ok
     end
     
     # return current user for profile route
@@ -12,10 +12,18 @@ class Api::V1::UsersController < ApplicationController
 
     # create a user from a hash being passed through params from frontend 
     def create
+        user = User.new(user_params)
 
+        if user.save 
+            render json: user, status: :ok
+        else
+            error_message = ["Passwords must match."]
+ 
+            render json: { errors: user.errors.full_messages }, status: 400
+        end
     end
 
-    # def edit
+    # def edit  
 
     # end
 
