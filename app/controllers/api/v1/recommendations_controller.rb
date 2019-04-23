@@ -50,6 +50,7 @@ class Api::V1::RecommendationsController < ApplicationController
             #     You can combine multiple attributes by providing a comma separated like "attribute1,attribute2". If multiple attributes are used, only businesses that satisfy ALL attributes will be returned in search results. For example, the attributes "hot_and_new,cashback" will return businesses that are Hot and New AND offer Cash Back.
 
         # random suggestion returned to user based on documented preferences only
+
         # building query hash that will be used for API call to Yelp
         def search_query(params)
             search_data = {}.tap do |data|
@@ -70,9 +71,9 @@ class Api::V1::RecommendationsController < ApplicationController
 
         # reusable method for business search calls
         def yelp_business_search(search_data)
-            # limit of 1000 results per call
             conn = Faraday.new(:url => "https://api.yelp.com/v3/businesses/search")
 
+            # limit of 1000 results per call, JSON returned
             biz_results = conn.get do |req|
                     req.headers['Authorization'] = "Bearer " + ENV['YELP_SECRET']
                     req.headers['User-Agent'] = "wdywe-api"
