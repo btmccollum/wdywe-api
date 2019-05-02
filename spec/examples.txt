@@ -1,7 +1,8 @@
 example_id                                                     | status | run_time        |
 -------------------------------------------------------------- | ------ | --------------- |
-./spec/controllers/recommendations_controller_spec.rb[1:1:1:1] | passed | 0.0042 seconds  |
-./spec/controllers/users_controller_spec.rb[1:1:1:1]           | passed | 0.01015 seconds |
-./spec/controllers/users_controller_spec.rb[1:1:1:2]           | passed | 0.0067 seconds  |
-./spec/controllers/users_controller_spec.rb[1:1:1:3]           | passed | 0.02994 seconds |
-./spec/controllers/users_controller_spec.rb[1:1:1:4]           | passed | 0.02065 seconds |
+./spec/controllers/application_controller_spec.rb[1:1:1:1]     | failed | 0.02854 seconds |
+./spec/controllers/recommendations_controller_spec.rb[1:1:1:1] | passed | 0.00731 seconds |
+./spec/controllers/users_controller_spec.rb[1:1:1:1]           | passed | 0.00987 seconds |
+./spec/controllers/users_controller_spec.rb[1:1:1:2]           | passed | 0.01738 seconds |
+./spec/controllers/users_controller_spec.rb[1:1:1:3]           | passed | 0.0095 seconds  |
+./spec/controllers/users_controller_spec.rb[1:1:1:4]           | passed | 0.01855 seconds |
